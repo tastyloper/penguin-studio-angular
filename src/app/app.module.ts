@@ -8,13 +8,15 @@ import { ServiceComponent } from './service/service.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { IsotopeModule } from 'ngx-isotope';
 import { WINDOW_PROVIDERS } from "./window.service";
+import { PortfolioPipe } from './portfolio.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PortfolioComponent,
     ServiceComponent,
-    ContactusComponent
+    ContactusComponent,
+    PortfolioPipe
   ],
   imports: [
     BrowserModule,

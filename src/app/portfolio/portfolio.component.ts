@@ -27,9 +27,7 @@ export class PortfolioComponent implements OnInit {
   public selected: string;
 
   constructor(
-    private portfolioService: PortfolioService,
-    @Inject(BrowserModule) private document: Document,
-    @Inject(WINDOW) private window
+    private portfolioService: PortfolioService
     ) { }
 
   ngOnInit() {
@@ -58,7 +56,7 @@ export class PortfolioComponent implements OnInit {
       'concert': () => {this.showItems = this.items.filter(({ subject }) => subject === 'concert')},
       'ad': () => {this.showItems = this.items.filter(({ subject }) => subject === 'ad')}
     }
-    console.log(this.selected);
     menu[this.selected]();
+    setTimeout('1000');
   }
 }

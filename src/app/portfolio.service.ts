@@ -1,8 +1,8 @@
 import { Injectable, Inject} from '@angular/core';
 import { Item } from "./portfolio/item";
 import { Observable, of } from 'rxjs';
-import { BrowserModule } from '@angular/platform-browser';
 import { WINDOW } from "./window.service";
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -158,7 +158,7 @@ export class PortfolioService {
   ]
 
   constructor(
-    @Inject(BrowserModule) private document: Document,
+    @Inject(DOCUMENT) private document: Document,
     @Inject(WINDOW) private window
   ) { }
 
