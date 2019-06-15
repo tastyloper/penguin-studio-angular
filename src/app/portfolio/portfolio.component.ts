@@ -21,8 +21,10 @@ export class PortfolioComponent implements OnInit {
     }
   };
 
-  public items: Item[];
+  private items: Item[];
+  public showItems: Item[];
   public isScroll: boolean = false;
+  public selected: string;
 
   constructor(
     private portfolioService: PortfolioService,
@@ -32,6 +34,7 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
+    this.selected = 'all';
   }
 
   // window scroll event 등록!
@@ -43,6 +46,19 @@ export class PortfolioComponent implements OnInit {
   // portfolioService의 ITEM 가져옴
   getItems(): void {
     this.portfolioService.getItems()
-      .subscribe(items => this.items = items);
+      .subscribe(items => { this.items = items; this.showItems = this.items; });
+    
+  }
+
+  filterItems(selected: HTMLButtonElement): void {
+    this.selected = selected.getAttribute('data-filter');
+    const menu = {
+      'all': () => {this.showItems = this.items},
+      'music': () => {this.showItems = this.items.filter(({ subject }) => subject === 'music')},
+      'concert': () => {this.showItems = this.items.filter(({ subject }) => subject === 'concert')},
+      'ad': () => {this.showItems = this.items.filter(({ subject }) => subject === 'ad')}
+    }
+    console.log(this.selected);
+    menu[this.selected]();
   }
 }
