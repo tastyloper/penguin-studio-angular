@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ServiceComponent } from './service/service.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { IsotopeModule } from 'ngx-isotope';
+import { WINDOW_PROVIDERS } from "./window.service";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { ContactusComponent } from './contactus/contactus.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    IsotopeModule
   ],
-  providers: [],
+  providers: [ WINDOW_PROVIDERS ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

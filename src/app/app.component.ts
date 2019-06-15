@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   selectedMenu: string;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+   
+    ) {
       this.selectedMenu = 'portfolio';
   }
 
@@ -18,4 +21,5 @@ export class AppComponent implements OnInit {
       this.selectedMenu = (this.router.url).split('/')[1];
     });
   }
+
 }
