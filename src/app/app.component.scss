@@ -33,6 +33,15 @@
   background-size: cover;
   background-position: center;
 }
+.title-wraper.title-portfolio {
+  background-image: url("/assets/images/portfolio/title-bg.jpeg");
+}
+.title-wraper.title-service {
+  background-image: url("/assets/images/service/title-bg.jpg");
+}
+.title-wraper.title-contactus {
+  background-image: url("/assets/images/contactus/title-bg.png");
+}
 .title-wraper:before {
   content: "";
   display: block;
