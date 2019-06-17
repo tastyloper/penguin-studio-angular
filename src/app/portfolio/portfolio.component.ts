@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { PortfolioService } from '../portfolio.service'
-import { IsotopeOptions } from 'ngx-isotope';
+import { IsotopeOptions, IsotopeGridComponent } from 'ngx-isotope';
 import { BrowserModule } from '@angular/platform-browser';
 import { WINDOW } from "../window.service";
 import { Item } from "./item";
@@ -51,12 +51,11 @@ export class PortfolioComponent implements OnInit {
   filterItems(selected: HTMLButtonElement): void {
     this.selected = selected.getAttribute('data-filter');
     const menu = {
-      'all': () => {this.showItems = this.items},
-      'music': () => {this.showItems = this.items.filter(({ subject }) => subject === 'music')},
-      'concert': () => {this.showItems = this.items.filter(({ subject }) => subject === 'concert')},
-      'ad': () => {this.showItems = this.items.filter(({ subject }) => subject === 'ad')}
+      'all': () => { this.showItems = this.items; },
+      'music': () => {this.showItems = this.items.filter(({ subject }) => subject === 'music');},
+      'concert': () => {this.showItems = this.items.filter(({ subject }) => subject === 'concert');},
+      'ad': () => {this.showItems = this.items.filter(({ subject }) => subject === 'ad');}
     }
     menu[this.selected]();
-    setTimeout('1000');
   }
 }
