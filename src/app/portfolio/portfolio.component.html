@@ -2,15 +2,15 @@
   <div class="button-group filters-button-group">
     <!-- Music  /  Concert  /  광고  /  교재[어학] -->
     <span>SHOW BY :</span>
-    <button class="button" (click)="filterItems(all)" [class.is-checked]="all.getAttribute('data-filter') === selected" data-filter="all" #all>All</button>
-    <button class="button" (click)="filterItems(music)" [class.is-checked]="music.getAttribute('data-filter') === selected" data-filter="music" #music>Music</button>
-    <button class="button" (click)="filterItems(concert)" [class.is-checked]="concert.getAttribute('data-filter') === selected" data-filter="concert" #concert>Concert</button>
-    <button class="button" (click)="filterItems(ad)" [class.is-checked]="ad.getAttribute('data-filter') === selected" data-filter="ad" #ad>Advertisement</button>
+    <button class="button" (click)="filterItems(all)" [class.is-checked]="all.dataset.filter === selected" data-filter="all" #all>All</button>
+    <button class="button" (click)="filterItems(music)" [class.is-checked]="music.dataset.filter === selected" data-filter="music" #music>Music</button>
+    <button class="button" (click)="filterItems(concert)" [class.is-checked]="concert.dataset.filter === selected" data-filter="concert" #concert>Concert</button>
+    <button class="button" (click)="filterItems(ad)" [class.is-checked]="ad.dataset.filter === selected" data-filter="ad" #ad>Advertisement</button>
   </div>
   <isotope-grid [options]="myOptions" class="grid" style="height: auto">
     <div class="grid-sizer"></div>
     <div class="gutter-sizer"></div>
-    <isotope-item *ngFor="let item of showItems | sort" class="grid-item {{item.subject}}" [class.scroll]="item.isScroll">
+    <isotope-item *ngFor="let item of (items | filterBy: selected)" class="grid-item {{item.subject}}" [class.scroll]="item.isScroll">
       <img src="{{item.img}}" alt="{{item.desc}}">
       <div class="subject-bg">
         <p>{{item.desc}}</p>

@@ -163,7 +163,7 @@ export class PortfolioService {
   ) { }
 
   getItems(): Observable<Item[]> {
-    return of(this.ITEMS);
+    return of([...this.ITEMS]);
   }
 
   setIsScroll(): void {
