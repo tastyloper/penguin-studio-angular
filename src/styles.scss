@@ -173,6 +173,10 @@ a, button {
 .btn:hover {
   transform: translate3d(0,-2px,0);
 }
+.btn-block {
+  display: block;
+  width: 100%;
+}
 .main-btn {
   color: #FFF;
   background: #E06035;

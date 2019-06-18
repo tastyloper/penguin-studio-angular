@@ -9,11 +9,8 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   selectedMenu: string;
 
-  constructor(
-    private router: Router,
-   
-    ) {
-      this.selectedMenu = 'portfolio';
+  constructor(private router: Router) {
+    this.selectedMenu = 'portfolio';
   }
 
   ngOnInit() {
