@@ -38,6 +38,6 @@ export class DashboardComponent implements OnInit {
 
   signout() {
     this.authService.signout();
-    this.router.navigate(['admin']);
+    this.router.navigate(['portfolio']);
   }
 }
