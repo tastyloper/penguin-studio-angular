@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /* 3rd party modules */
 // https://github.com/auth0/angular2-jwt
@@ -30,6 +31,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.component';
 
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -44,13 +47,16 @@ import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.co
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    IsotopeModule
+    IsotopeModule,
+    SharedModule,
+    CoreModule
   ],
-  providers: [ 
+  providers: [
     AuthService,
     UserService,
     AuthGuard,

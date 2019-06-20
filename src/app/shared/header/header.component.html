@@ -1,0 +1,27 @@
+<header class="header">
+  <h1 class="logo">
+    <a href="/" class="transition">
+      <div class="img-wrap">
+        <img src="/assets/images/common/logo.jpg" alt="penguin's studio" title="팽귄 스튜디오">
+      </div>
+      <div class="logo-title">penguin's studio</div>
+    </a>
+  </h1>
+  <a class="menu-btn icon-menu" (click)="toggleService.toggleMenu()"></a>
+  <nav class="navigation" [class.active]="toggleService.isMenuActive">
+    <h2 class="readable-hidden">메인메뉴</h2>
+    <ul class="menu">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/portfolio">portfolio</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/service">service</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/contactus">contact us</a>
+      </li>
+    </ul>
+    <a href="javascript:void(0);" class="menu-close-btn icon-cancel"></a>
+  </nav>
+  <div class="menu-open-bg" (click)="toggleService.toggleMenu()" [class.backgorund-active]="toggleService.isMenuActive"></div>
+</header>

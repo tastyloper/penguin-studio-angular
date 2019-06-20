@@ -12,9 +12,9 @@ import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.co
 
 const routes: Routes = [
   { path: '', redirectTo: '/portfolio', pathMatch: 'full' },
-  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'portfolio', component: PortfolioComponent, data: {animation: 'main'} },
   { path: 'portfolioCreate', component: PortfolioCreateComponent },
-  { path: 'service', component: ServiceComponent },
+  { path: 'service', component: ServiceComponent, data: {animation: 'main'} },
   { path: 'contactus', component: ContactusComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard] },

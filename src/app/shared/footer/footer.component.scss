@@ -1,0 +1,25 @@
+@charset "utf-8";
+@import "../../../output-scss/common";
+
+.footer {
+  position: relative;
+  z-index: 1;
+  height: 85px;
+  padding: 35px 0;
+  color: #8E8E8E;
+  text-align: center;
+  background-color: #FFF;
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 40px;
+  left: 40px;
+  height: 1px;
+  background: #E6E6E5;
+}
+.copyright {
+  color: #CCC;
+  font-size: 12px;
+}
