@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, NgZone } from '@angular/core';
 import { Item } from '../models/item';
 
 import { PortfolioService } from '../services/portfolio.service';
 import { AuthService } from '../services/auth.service';
+import { filter } from 'minimatch';
 
 @Component({
   selector: 'app-portfolio',
@@ -18,8 +19,15 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private portfolioService: PortfolioService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    zone: NgZone
+  ) {
+    this.getItems();
+    zone.runOutsideAngular(() => {
+      setInterval(this.getItems.bind(this), 1);
+      setInterval(this.filterItems.bind(this), 1);
+    })
+  }
 
   ngOnInit() {
     this.getItems();
@@ -32,12 +40,18 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
 
   // portfolioService의 ITEM 가져옴
   getItems(): void {
-    this.portfolioService.items
-      .subscribe(items => { this.items = items; this.showItems = this.items; });
+    this.items = this.portfolioService.items;
+    this.showItems = this.items;
+    // this.portfolioService.items
+    //   .subscribe(items => { this.items = items; this.showItems = this.items; });
   }
 
-  filterItems(selected: HTMLButtonElement): void {
+  setFilter(selected: HTMLButtonElement): void {
     this.selected = selected.dataset.filter;
+    this.filterItems();
+  }
+
+  filterItems() {
     const menu = {
       'all': () => { this.showItems = this.items; },
       'music': () => {this.showItems = this.items.filter(({ type }) => type === 'music');},

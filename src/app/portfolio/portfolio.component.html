@@ -2,14 +2,14 @@
   <div class="button-group filters-button-group">
     <!-- Music  /  Concert  /  광고  /  교재[어학] -->
     <span>SHOW BY :</span>
-    <button class="button" (click)="filterItems(all)" [class.is-checked]="all.getAttribute('data-filter') === selected" data-filter="all" #all>All</button>
-    <button class="button" (click)="filterItems(music)" [class.is-checked]="music.getAttribute('data-filter') === selected" data-filter="music" #music>Music</button>
-    <button class="button" (click)="filterItems(concert)" [class.is-checked]="concert.getAttribute('data-filter') === selected" data-filter="concert" #concert>Concert</button>
-    <button class="button" (click)="filterItems(ad)" [class.is-checked]="ad.getAttribute('data-filter') === selected" data-filter="ad" #ad>Advertisement</button>
+    <button class="button" (click)="setFilter(all)" [class.is-checked]="all.getAttribute('data-filter') === selected" data-filter="all" #all>All</button>
+    <button class="button" (click)="setFilter(music)" [class.is-checked]="music.getAttribute('data-filter') === selected" data-filter="music" #music>Music</button>
+    <button class="button" (click)="setFilter(concert)" [class.is-checked]="concert.getAttribute('data-filter') === selected" data-filter="concert" #concert>Concert</button>
+    <button class="button" (click)="setFilter(ad)" [class.is-checked]="ad.getAttribute('data-filter') === selected" data-filter="ad" #ad>Advertisement</button>
 
     <a routerLink="/portfolioCreate" class="button admin-show" *ngIf="isAdmin">new</a>
   </div>
-  <div class="grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300">
+  <div class="grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" >
     <div class="grid-item animated fadeIn" *ngFor="let item of showItems | sort" [style.height.px]="img.height" (click)="popUp(item)">
       <div [attr.id]="'item' + item.id" class="card bg-dark text-white" (load)="resizeGridItem(item)">
         <img src="{{item.img}}" alt="{{item.desc}}" #img>

@@ -180,14 +180,17 @@ export class PortfolioService {
     }
   ];
 
-  public layerShow = false;
+  public layerShow = false
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(WINDOW) private window
   ) {}
 
-  get items(): Observable<Item[]> {
-    return of([...this.ITEMS]);
+  get items(): Item[] {
+    return [...this.ITEMS];
   }
+  // get items(): Observable<Item[]> {
+  //   return of([...this.ITEMS]);
+  // }
 }
