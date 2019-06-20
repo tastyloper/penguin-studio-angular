@@ -196,3 +196,16 @@ a, button {
   margin: -1px;
   clip: rect(0, 0, 0, 0);
 }
+.alert {
+  display: block;
+  margin-bottom: 20px;
+  padding: 7px 15px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}

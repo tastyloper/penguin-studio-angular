@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { PortfolioService } from '../portfolio.service'
-import { IsotopeOptions, IsotopeGridComponent } from 'ngx-isotope';
-import { BrowserModule } from '@angular/platform-browser';
-import { WINDOW } from "../window.service";
-import { Item } from "./item";
+import { Component, OnInit, HostListener } from '@angular/core';
+import { IsotopeOptions } from 'ngx-isotope';
+
+import { Item } from '../models/item';
+
+import { PortfolioService } from '../services/portfolio.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -23,12 +24,13 @@ export class PortfolioComponent implements OnInit {
 
   private items: Item[];
   public showItems: Item[];
-  public isScroll: boolean = false;
+  public isScroll = false;
   public selected: string;
 
   constructor(
-    private portfolioService: PortfolioService
-    ) { }
+    private portfolioService: PortfolioService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.getItems();
@@ -36,7 +38,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   // window scroll event 등록!
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     this.portfolioService.setIsScroll();
   }
@@ -45,7 +47,6 @@ export class PortfolioComponent implements OnInit {
   getItems(): void {
     this.portfolioService.getItems()
       .subscribe(items => { this.items = items; this.showItems = this.items; });
-    
   }
 
   filterItems(selected: HTMLButtonElement): void {
@@ -57,5 +58,9 @@ export class PortfolioComponent implements OnInit {
       'ad': () => {this.showItems = this.items.filter(({ subject }) => subject === 'ad');}
     }
     menu[this.selected]();
+  }
+
+  get isAdmin() {
+    return this.authService.isAuthenticated();
   }
 }

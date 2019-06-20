@@ -16,7 +16,8 @@ export class AdminComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.signinForm = this.fb.group({

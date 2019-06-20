@@ -30,7 +30,6 @@ export class DashboardComponent implements OnInit {
     this.header = this.route.snapshot.data as Header;
     // 토큰에서 사용자 아이디 취득
     this.userid = this.authService.getUserid();
-
     // 사용자 정보 취득
     this.userService.getUsers()
       .subscribe(users => this.users = users);
@@ -38,6 +37,6 @@ export class DashboardComponent implements OnInit {
 
   signout() {
     this.authService.signout();
-    this.router.navigate(['admin']);
+    this.router.navigate(['portfolio']);
   }
 }

@@ -21,6 +21,7 @@
     "@angular/router": "~8.0.0",
     "angular2-isotope": "0.0.2",
     "angular2-jwt": "^0.2.3",
+    "font-awesome": "^4.7.0",
     "imagesloaded": "^4.1.4",
     "isotope-layout": "^3.0.6",
     "ngx-isotope": "^0.1.7",
