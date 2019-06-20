@@ -180,6 +180,8 @@ export class PortfolioService {
     }
   ];
 
+  public layerShow = false;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(WINDOW) private window

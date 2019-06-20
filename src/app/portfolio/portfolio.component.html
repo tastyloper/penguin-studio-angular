@@ -20,14 +20,14 @@
     </div>
   </div>
 </section>
-<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle" *ngIf="showPopUp.active" [class.layer-show]="showPopUp.active">
+<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle"[class.layer-show]="showPopUp.active">
   <div class="layer_area">
-    <div class="img" [ngStyle]="{'background-image': 'url(' + showPopUp.item.img + ')'}"></div>
+    <div class="img" [ngStyle]="showPopUp.active ? {'background-image': 'url(' + showPopUp.item.img + ')'} : ''"></div>
     <div class="info-wrap">
       <p class="info-date">
         <time>2019.04.07</time>
       </p>
-      <p class="info-title">{{showPopUp.item.desc}}</p>
+      <p class="info-title">{{showPopUp.active ? showPopUp.item.desc : ''}}</p>
       <p class="info-producing">Performed by <b>COVEO</b>, Written by <b>Connell McCarthy</b>, Produced by
         <b>COVEO</b></p>
       <p class="info-copyright">&copy; 2018 COVEO Music</p>
