@@ -9,16 +9,16 @@
 
     <a routerLink="/portfolioCreate" class="button admin-show" *ngIf="isAdmin">new</a>
   </div>
-  <isotope-grid [options]="myOptions" class="grid" style="height: auto">
-    <div class="grid-sizer"></div>
-    <div class="gutter-sizer"></div>
-    <isotope-item *ngFor="let item of showItems | sort" class="grid-item {{item.subject}}" [class.scroll]="item.isScroll">
-      <img src="{{item.img}}" alt="{{item.desc}}">
-      <div class="subject-bg">
-        <p>{{item.desc}}</p>
+  <div class="flex-container grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300">
+    <div class="grid-item flex-item animated fadeIn" *ngFor="let item of showItems | sort">
+      <div [attr.id]="'item' + item.id" class="card bg-dark text-white" (load)="resizeGridItem(item)">
+        <img class="card-img-top" src="{{item.img}}" alt="{{item.desc}}">
+        <div class="subject-bg card-body">
+          <p class="card-text">{{item.desc}}</p>
+        </div>
       </div>
-    </isotope-item>
-  </isotope-grid>
+    </div>
+  </div>
 </section>
 <div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle">
   <div class="layer_area">

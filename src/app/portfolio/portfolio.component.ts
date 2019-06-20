@@ -1,6 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { IsotopeOptions } from 'ngx-isotope';
-
+import { Component, OnInit, HostListener, AfterViewChecked } from '@angular/core';
 import { Item } from '../models/item';
 
 import { PortfolioService } from '../services/portfolio.service';
@@ -11,16 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
-export class PortfolioComponent implements OnInit {
-
-  public myOptions: IsotopeOptions = {
-    itemSelector: '.grid-item',
-    percentPosition: true,
-    masonry: {
-      columnWidth: '.grid-sizer',
-      gutter: '.gutter-sizer'
-    }
-  };
+export class PortfolioComponent implements OnInit, AfterViewChecked {
 
   private items: Item[];
   public showItems: Item[];
@@ -37,6 +26,10 @@ export class PortfolioComponent implements OnInit {
     this.selected = 'all';
   }
 
+  ngAfterViewChecked() {
+    this.resizeAllGridItems();
+  }
+
   // window scroll event 등록!
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -45,7 +38,7 @@ export class PortfolioComponent implements OnInit {
 
   // portfolioService의 ITEM 가져옴
   getItems(): void {
-    this.portfolioService.getItems()
+    this.portfolioService.items
       .subscribe(items => { this.items = items; this.showItems = this.items; });
   }
 
@@ -53,11 +46,30 @@ export class PortfolioComponent implements OnInit {
     this.selected = selected.getAttribute('data-filter');
     const menu = {
       'all': () => { this.showItems = this.items; },
-      'music': () => {this.showItems = this.items.filter(({ subject }) => subject === 'music');},
-      'concert': () => {this.showItems = this.items.filter(({ subject }) => subject === 'concert');},
-      'ad': () => {this.showItems = this.items.filter(({ subject }) => subject === 'ad');}
+      'music': () => {this.showItems = this.items.filter(({ type }) => type === 'music');},
+      'concert': () => {this.showItems = this.items.filter(({ type }) => type === 'concert');},
+      'ad': () => {this.showItems = this.items.filter(({ type }) => type === 'ad');}
     }
     menu[this.selected]();
+  }
+
+  onResize(event) {
+    this.resizeAllGridItems();
+  }
+
+  resizeGridItem(item) {
+    const grid = document.getElementsByClassName("flex-container")[0];
+    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+    const rowSpan = Math.ceil((item.querySelector('.card').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+    item.style.gridRowEnd = "span "+ rowSpan;
+  }
+
+  resizeAllGridItems() {
+    const allItems = document.getElementsByClassName("flex-item");
+    for (var x = 0; x < allItems.length; x++) {
+      this.resizeGridItem(allItems[x]);
+    }
   }
 
   get isAdmin() {
