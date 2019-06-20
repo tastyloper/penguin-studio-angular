@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Item } from '../models/item';
 
 import { PortfolioService } from '../services/portfolio.service';
@@ -13,8 +13,8 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
 
   private items: Item[];
   public showItems: Item[];
-  public isScroll = false;
   public selected: string;
+  public showPopUp = { active: false, item: null };
 
   constructor(
     private portfolioService: PortfolioService,
@@ -30,12 +30,6 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
     this.resizeAllGridItems();
   }
 
-  // window scroll event 등록!
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.portfolioService.setIsScroll();
-  }
-
   // portfolioService의 ITEM 가져옴
   getItems(): void {
     this.portfolioService.items
@@ -43,7 +37,7 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
   }
 
   filterItems(selected: HTMLButtonElement): void {
-    this.selected = selected.getAttribute('data-filter');
+    this.selected = selected.dataset.filter;
     const menu = {
       'all': () => { this.showItems = this.items; },
       'music': () => {this.showItems = this.items.filter(({ type }) => type === 'music');},
@@ -58,21 +52,28 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
   }
 
   resizeGridItem(item) {
-    const grid = document.getElementsByClassName("flex-container")[0];
+    const grid = document.getElementsByClassName('grid')[0];
     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
     const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-    const rowSpan = Math.ceil((item.querySelector('.card').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-    item.style.gridRowEnd = "span "+ rowSpan;
+    const rowSpan = Math.ceil((item.querySelector('.card > img').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+    
+    item.style.gridRowEnd = `span ${rowSpan}`;
   }
 
   resizeAllGridItems() {
-    const allItems = document.getElementsByClassName("flex-item");
+    const allItems = document.getElementsByClassName('grid-item');
     for (var x = 0; x < allItems.length; x++) {
       this.resizeGridItem(allItems[x]);
     }
   }
 
+  popUp(item: Item) {
+    this.showPopUp.active = true;
+    this.showPopUp.item = item;
+  }
+
   get isAdmin() {
     return this.authService.isAuthenticated();
   }
+
 }

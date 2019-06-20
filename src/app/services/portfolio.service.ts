@@ -188,15 +188,4 @@ export class PortfolioService {
   get items(): Observable<Item[]> {
     return of([...this.ITEMS]);
   }
-
-  setIsScroll(): void {
-    this.ITEMS.forEach(item => {
-      const num = this.window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-      if (num > 50) {
-        item.isScroll = true;
-      } else if (item.isScroll && num < 10) {
-        item.isScroll = false;
-      }
-    });
-  }
 }

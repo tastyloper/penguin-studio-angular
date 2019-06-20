@@ -9,25 +9,25 @@
 
     <a routerLink="/portfolioCreate" class="button admin-show" *ngIf="isAdmin">new</a>
   </div>
-  <div class="flex-container grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300">
-    <div class="grid-item flex-item animated fadeIn" *ngFor="let item of showItems | sort">
+  <div class="grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300">
+    <div class="grid-item animated fadeIn" *ngFor="let item of showItems | sort" [style.height.px]="img.height" (click)="popUp(item)">
       <div [attr.id]="'item' + item.id" class="card bg-dark text-white" (load)="resizeGridItem(item)">
-        <img class="card-img-top" src="{{item.img}}" alt="{{item.desc}}">
-        <div class="subject-bg card-body">
-          <p class="card-text">{{item.desc}}</p>
+        <img src="{{item.img}}" alt="{{item.desc}}" #img>
+        <div class="subject-bg" [style.height.px]="img.height">
+          <p>{{item.desc}}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle">
+<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle" *ngIf="showPopUp.active" [class.layer-show]="showPopUp.active">
   <div class="layer_area">
-    <div class="img"></div>
+    <div class="img" [ngStyle]="{'background-image': 'url(' + showPopUp.item.img + ')'}"></div>
     <div class="info-wrap">
       <p class="info-date">
         <time>2019.04.07</time>
       </p>
-      <p class="info-title">삼성 갤럭시 S7 유연석, 이광수, 조윤우 편</p>
+      <p class="info-title">{{showPopUp.item.desc}}</p>
       <p class="info-producing">Performed by <b>COVEO</b>, Written by <b>Connell McCarthy</b>, Produced by
         <b>COVEO</b></p>
       <p class="info-copyright">&copy; 2018 COVEO Music</p>
@@ -37,6 +37,6 @@
         </li>
       </ul>
     </div>
-    <button id="layer-close" class="layer-close icon-cancel"></button>
+    <button id="layer-close" class="layer-close icon-cancel" (click)="showPopUp.active = false"></button>
   </div>
 </div>
