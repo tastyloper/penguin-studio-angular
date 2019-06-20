@@ -13,13 +13,13 @@ import { IsotopeModule } from 'ngx-isotope';
 // Services
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-import { WINDOW_PROVIDERS } from './window.service';
+import { WINDOW_PROVIDERS } from './services/window.service';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
 
 // Pipe
-import { PortfolioPipe } from './portfolio.pipe';
+import { PortfolioPipe } from './pipe/portfolio.pipe';
 
 // Component
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { ServiceComponent } from './service/service.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
+import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AdminComponent } from './admin/admin.component';
     ContactusComponent,
     PortfolioPipe,
     DashboardComponent,
-    AdminComponent
+    AdminComponent,
+    PortfolioCreateComponent
   ],
   imports: [
     BrowserModule,

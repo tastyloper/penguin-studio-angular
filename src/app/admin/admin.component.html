@@ -3,22 +3,18 @@
   <form [formGroup]="signinForm" (ngSubmit)="signin()" novalidate>
     <input formControlName="userid" type="text" class="form-control input-lg" name="userid" placeholder="email">
     <input formControlName="password" type="password" class="form-control input-lg" name="password" placeholder="password">
-    <div class="alert-box">
-      <em *ngIf="userid.errors?.required && userid.touched" class="text-danger">
-        userid를 입력하세요!</em>
-      <em *ngIf="userid.errors?.pattern && userid.touched" class="text-danger">
-        userid를 이메일 형식에 맞게 입력하세요!</em>
-    </div>
-    <div class="alert-box">
-      <em *ngIf="password.errors?.required && password.touched" class="text-danger">
-        password를 입력하세요!</em>
-      <em *ngIf="password.errors?.pattern && password.touched" class="text-danger">
-        password는 영문 또는 숫자로 입력하세요!</em>
-      <em *ngIf="password.errors?.minlength && password.touched" class="text-danger">
-        password는 4자리 이상으로 입력하세요!</em>
-      <em *ngIf="password.errors?.maxlength && password.touched" class="text-danger">
-        password는 10자리 이하로 입력하세요!</em>
-    </div>
+    <em *ngIf="userid.errors?.required && userid.touched" class="alert alert-danger">
+      userid를 입력하세요!</em>
+    <em *ngIf="userid.errors?.pattern && userid.touched" class="alert alert-danger">
+      userid를 이메일 형식에 맞게 입력하세요!</em>
+    <em *ngIf="password.errors?.required && password.touched" class="alert alert-danger">
+      password를 입력하세요!</em>
+    <em *ngIf="password.errors?.pattern && password.touched" class="alert alert-danger">
+      password는 영문 또는 숫자로 입력하세요!</em>
+    <em *ngIf="password.errors?.minlength && password.touched" class="alert alert-danger">
+      password는 4자리 이상으로 입력하세요!</em>
+    <em *ngIf="password.errors?.maxlength && password.touched" class="alert alert-danger">
+      password는 10자리 이하로 입력하세요!</em>
     <div *ngIf="message" class="alert alert-danger">{{message}}</div>
     <button [disabled]="signinForm.invalid" type="submit" class="btn main-btn btn-block login-btn">로그인</button>
   </form>

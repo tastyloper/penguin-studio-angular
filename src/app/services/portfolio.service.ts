@@ -1,14 +1,14 @@
 import { Injectable, Inject} from '@angular/core';
-import { Item } from "./portfolio/item";
 import { Observable, of } from 'rxjs';
-import { WINDOW } from "./window.service";
 import { DOCUMENT } from '@angular/common';
+
+import { Item } from '../models/item';
+import { WINDOW } from './window.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
-
   ITEMS: Item[] = [
     {
       img: 'assets/images/portfolio/music-cover-1.jpg',
@@ -153,14 +153,13 @@ export class PortfolioService {
       desc: '토니모리 안정환, 김성주편',
       subject: 'ad',
       isScroll: false
-    },
-    
-  ]
+    }
+  ];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(WINDOW) private window
-  ) { }
+  ) {}
 
   getItems(): Observable<Item[]> {
     return of(this.ITEMS);
@@ -168,10 +167,10 @@ export class PortfolioService {
 
   setIsScroll(): void {
     this.ITEMS.forEach(item => {
-      const number = this.window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-      if (number > 50) {
+      const num = this.window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+      if (num > 50) {
         item.isScroll = true;
-      } else if (item.isScroll && number < 10) {
+      } else if (item.isScroll && num < 10) {
         item.isScroll = false;
       }
     });
