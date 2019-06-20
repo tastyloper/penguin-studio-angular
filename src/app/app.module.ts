@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 /* 3rd party modules */
 // https://github.com/auth0/angular2-jwt
 import { JwtHelper } from 'angular2-jwt';
-// https://github.com/ascodix/ngx-isotope
-import { IsotopeModule } from 'ngx-isotope';
+// https://www.npmjs.com/package/ngx-infinite-scroll
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -48,7 +48,7 @@ import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.co
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    IsotopeModule
+    InfiniteScrollModule
   ],
   providers: [ 
     AuthService,

@@ -2,32 +2,32 @@
   <div class="button-group filters-button-group">
     <!-- Music  /  Concert  /  광고  /  교재[어학] -->
     <span>SHOW BY :</span>
-    <button class="button" (click)="filterItems(all)" [class.is-checked]="all.getAttribute('data-filter') === selected" data-filter="all" #all>All</button>
-    <button class="button" (click)="filterItems(music)" [class.is-checked]="music.getAttribute('data-filter') === selected" data-filter="music" #music>Music</button>
-    <button class="button" (click)="filterItems(concert)" [class.is-checked]="concert.getAttribute('data-filter') === selected" data-filter="concert" #concert>Concert</button>
-    <button class="button" (click)="filterItems(ad)" [class.is-checked]="ad.getAttribute('data-filter') === selected" data-filter="ad" #ad>Advertisement</button>
+    <button class="button" (click)="setFilter(all)" [class.is-checked]="all.getAttribute('data-filter') === selected" data-filter="all" #all>All</button>
+    <button class="button" (click)="setFilter(music)" [class.is-checked]="music.getAttribute('data-filter') === selected" data-filter="music" #music>Music</button>
+    <button class="button" (click)="setFilter(concert)" [class.is-checked]="concert.getAttribute('data-filter') === selected" data-filter="concert" #concert>Concert</button>
+    <button class="button" (click)="setFilter(ad)" [class.is-checked]="ad.getAttribute('data-filter') === selected" data-filter="ad" #ad>Advertisement</button>
 
     <a routerLink="/portfolioCreate" class="button admin-show" *ngIf="isAdmin">new</a>
   </div>
-  <isotope-grid [options]="myOptions" class="grid" style="height: auto">
-    <div class="grid-sizer"></div>
-    <div class="gutter-sizer"></div>
-    <isotope-item *ngFor="let item of showItems | sort" class="grid-item {{item.subject}}" [class.scroll]="item.isScroll">
-      <img src="{{item.img}}" alt="{{item.desc}}">
-      <div class="subject-bg">
-        <p>{{item.desc}}</p>
+  <div class="grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" >
+    <div class="grid-item animated fadeIn" *ngFor="let item of showItems | sort" [style.height.px]="img.height" (click)="popUp(item)">
+      <div [attr.id]="'item' + item.id" class="card bg-dark text-white" (load)="resizeGridItem(item)">
+        <img src="{{item.img}}" alt="{{item.desc}}" #img>
+        <div class="subject-bg" [style.height.px]="img.height">
+          <p>{{item.desc}}</p>
+        </div>
       </div>
-    </isotope-item>
-  </isotope-grid>
+    </div>
+  </div>
 </section>
-<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle">
+<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle"[class.layer-show]="showPopUp.active">
   <div class="layer_area">
-    <div class="img"></div>
+    <div class="img" [ngStyle]="showPopUp.active ? {'background-image': 'url(' + showPopUp.item.img + ')'} : ''"></div>
     <div class="info-wrap">
       <p class="info-date">
         <time>2019.04.07</time>
       </p>
-      <p class="info-title">삼성 갤럭시 S7 유연석, 이광수, 조윤우 편</p>
+      <p class="info-title">{{showPopUp.active ? showPopUp.item.desc : ''}}</p>
       <p class="info-producing">Performed by <b>COVEO</b>, Written by <b>Connell McCarthy</b>, Produced by
         <b>COVEO</b></p>
       <p class="info-copyright">&copy; 2018 COVEO Music</p>
@@ -37,6 +37,6 @@
         </li>
       </ul>
     </div>
-    <button id="layer-close" class="layer-close icon-cancel"></button>
+    <button id="layer-close" class="layer-close icon-cancel" (click)="showPopUp.active = false"></button>
   </div>
 </div>
