@@ -7,7 +7,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 import { User } from '../models/user';
 import { Token } from '../models/token';

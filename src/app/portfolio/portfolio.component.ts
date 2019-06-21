@@ -1,9 +1,8 @@
 import { Component, OnInit, AfterViewChecked, NgZone } from '@angular/core';
-import { Item } from '../models/item';
+import { Item } from '../core/models/item';
 
-import { PortfolioService } from '../services/portfolio.service';
-import { AuthService } from '../services/auth.service';
-import { filter } from 'minimatch';
+import { PortfolioService } from '../core/service/portfolio.service';
+import { AuthService } from '../core/service/auth.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -26,7 +25,7 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
     zone.runOutsideAngular(() => {
       setInterval(this.getItems.bind(this), 1);
       setInterval(this.filterItems.bind(this), 1);
-    })
+    });
   }
 
   ngOnInit() {
@@ -70,13 +69,12 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
     const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
     const rowSpan = Math.ceil((item.querySelector('.card > img').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-    
     item.style.gridRowEnd = `span ${rowSpan}`;
   }
 
   resizeAllGridItems() {
     const allItems = document.getElementsByClassName('grid-item');
-    for (var x = 0; x < allItems.length; x++) {
+    for (let x = 0; x < allItems.length; x++) {
       this.resizeGridItem(allItems[x]);
     }
   }
@@ -89,5 +87,4 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
   get isAdmin() {
     return this.authService.isAuthenticated();
   }
-
 }

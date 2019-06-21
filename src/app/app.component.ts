@@ -8,7 +8,8 @@ import { fadeAnimation } from './core/animation/fade.animation';
     <div class="wrapper">
       <app-header></app-header>
       <div class="contents-wrap">
-        <div class="contents" [@fadeAnimation]="getRouterOutletState(outlet)">
+        <!-- <div class="contents" [@fadeAnimation]="getRouterOutletState(outlet)"> -->
+        <div class="contents">
           <app-page-title></app-page-title>
           <router-outlet #outlet="outlet"></router-outlet>
         </div>

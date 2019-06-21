@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Item } from '../models/item';
-import { PortfolioService } from '../services/portfolio.service';
+import { Item } from '../core/models/item';
+import { PortfolioService } from '../core/service/portfolio.service';
 
 @Component({
   selector: 'app-portfolio-create',

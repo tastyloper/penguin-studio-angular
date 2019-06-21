@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /* 3rd party modules */
@@ -11,18 +11,7 @@ import { JwtHelper } from 'angular2-jwt';
 // https://www.npmjs.com/package/ngx-infinite-scroll
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
-// Services
-import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
-import { WINDOW_PROVIDERS } from './services/window.service';
-
-// Guards
-import { AuthGuard } from './guards/auth.guard';
-
-// Pipe
-import { PortfolioPipe } from './pipe/portfolio.pipe';
-
-// Component
+/* Component */
 import { AppComponent } from './app.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ServiceComponent } from './service/service.component';
@@ -31,8 +20,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.component';
 
+/* Module */
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+
 
 @NgModule({
   declarations: [
@@ -40,28 +31,23 @@ import { CoreModule } from './core/core.module';
     PortfolioComponent,
     ServiceComponent,
     ContactusComponent,
-    PortfolioPipe,
     DashboardComponent,
     AdminComponent,
     PortfolioCreateComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
     InfiniteScrollModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    AuthService,
-    UserService,
-    AuthGuard,
-    JwtHelper,
-    WINDOW_PROVIDERS
+    JwtHelper
   ],
   bootstrap: [AppComponent]
 })

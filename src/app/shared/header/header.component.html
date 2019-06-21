@@ -7,21 +7,21 @@
       <div class="logo-title">penguin's studio</div>
     </a>
   </h1>
-  <a class="menu-btn icon-menu" (click)="toggleService.toggleMenu()"></a>
-  <nav class="navigation" [class.active]="toggleService.isMenuActive">
+  <a href="javascript:void(0);" class="menu-btn icon-menu" (click)="toggleService.toggleMenu()"></a>
+  <nav class="navigation" [class.nav-act]="toggleService.isMenuActive">
     <h2 class="readable-hidden">메인메뉴</h2>
     <ul class="menu">
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/portfolio">portfolio</a>
+        <a routerLink="/portfolio" (click)="toggleService.toggleMenu()">portfolio</a>
       </li>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/service">service</a>
+        <a routerLink="/service" (click)="toggleService.toggleMenu()">service</a>
       </li>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/contactus">contact us</a>
+        <a routerLink="/contactus" (click)="toggleService.toggleMenu()">contact us</a>
       </li>
     </ul>
-    <a href="javascript:void(0);" class="menu-close-btn icon-cancel"></a>
+    <a href="javascript:void(0);" class="menu-close-btn icon-cancel" (click)="toggleService.toggleMenu()"></a>
   </nav>
-  <div class="menu-open-bg" (click)="toggleService.toggleMenu()" [class.backgorund-active]="toggleService.isMenuActive"></div>
+  <div class="menu-open-bg" (click)="toggleService.toggleMenu()" [class.menu-bg-act]="toggleService.isMenuActive"></div>
 </header>

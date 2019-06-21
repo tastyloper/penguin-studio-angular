@@ -11,7 +11,7 @@ $desktop-width: 1200px;
 
 // only 모바일
 @mixin only-mobile {
-  @media (max-width: #{under-mobile}) {
+  @media (max-width: #{$under-mobile}) {
     @content;
   }
 }

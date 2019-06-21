@@ -10,7 +10,7 @@
     <a routerLink="/portfolioCreate" class="button admin-show" *ngIf="isAdmin">new</a>
   </div>
   <div class="grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" >
-    <div class="grid-item animated fadeIn" *ngFor="let item of showItems | sort" [style.height.px]="img.height" (click)="popUp(item)">
+    <div class="grid-item animated fadeIn" *ngFor="let item of showItems" [style.height.px]="img.height" (click)="popUp(item)">
       <div [attr.id]="'item' + item.id" class="card bg-dark text-white" (load)="resizeGridItem(item)">
         <img src="{{item.img}}" alt="{{item.desc}}" #img>
         <div class="subject-bg" [style.height.px]="img.height">

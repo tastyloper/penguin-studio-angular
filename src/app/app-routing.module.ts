@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ServiceComponent } from './service/service.component';
@@ -11,14 +11,14 @@ import { AdminComponent } from './admin/admin.component';
 import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/portfolio', pathMatch: 'full' },
+  { path: '', redirectTo: 'portfolio', pathMatch: 'full' },
   { path: 'portfolio', component: PortfolioComponent, data: {animation: 'main'} },
   { path: 'portfolioCreate', component: PortfolioCreateComponent },
   { path: 'service', component: ServiceComponent, data: {animation: 'main'} },
   { path: 'contactus', component: ContactusComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard] },
-  { path: '**', redirectTo: '' }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'portfolio' }
 ];
 
 @NgModule({
