@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewChecked, NgZone } from '@angular/core';
-import { Item } from '../core/models/item';
+import { Item } from '../../core/models/item';
 
-import { PortfolioService } from '../core/service/portfolio.service';
-import { AuthService } from '../core/service/auth.service';
+import { PortfolioService } from '../../core/service/portfolio.service';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-portfolio',

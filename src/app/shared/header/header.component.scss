@@ -1,6 +1,10 @@
 @charset "utf-8";
 @import "../../../output-scss/common";
 
+.header {
+  z-index: 1000;
+}
+
 @include only-mobile {
   /* 헤더 */
   .header {
@@ -113,11 +117,9 @@
 }
 @include mobile-width {
   .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 150px;
+    position: absolute;
     height: 100%;
+    width: 150px;
     padding: 26px 25px 0;
     font-family: 'Didact Gothic', sans-serif;
     background-color: #EAEFF2;

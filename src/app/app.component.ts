@@ -5,16 +5,9 @@ import { fadeAnimation } from './core/animation/fade.animation';
   selector: 'app-root',
   animations: [fadeAnimation],
   template: `
-    <div class="wrapper">
-      <app-header></app-header>
-      <div class="contents-wrap">
-        <!-- <div class="contents" [@fadeAnimation]="getRouterOutletState(outlet)"> -->
-        <div class="contents">
-          <app-page-title></app-page-title>
-          <router-outlet #outlet="outlet"></router-outlet>
-        </div>
-        <app-footer></app-footer>
-      </div>
+    <app-header></app-header>
+    <div class="contents" [@fadeAnimation]="getRouterOutletState(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
     </div>
   `,
   styleUrls: ['./app.component.scss']

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../core/service/auth.service';
-import { UserService } from '../core/service/user.service';
-import { User } from '../core/models/user';
+import { AuthService } from '../../core/service/auth.service';
+import { UserService } from '../../core/service/user.service';
+import { User } from '../../core/models/user';
 
 interface Header {
   title: string;
