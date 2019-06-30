@@ -1,28 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from './core/guards/auth.guard';
-
-import { PortfolioComponent } from './portfolio/portfolio.component';
-import { ServiceComponent } from './service/service.component';
-import { ContactusComponent } from './contactus/contactus.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AdminComponent } from './admin/admin.component';
-import { PortfolioCreateComponent } from './portfolio-create/portfolio-create.component';
-
 const routes: Routes = [
-  { path: '', redirectTo: 'portfolio', pathMatch: 'full' },
-  { path: 'portfolio', component: PortfolioComponent, data: {animation: 'main'} },
-  { path: 'portfolioCreate', component: PortfolioCreateComponent },
-  { path: 'service', component: ServiceComponent, data: {animation: 'main'} },
-  { path: 'contactus', component: ContactusComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'portfolio' }
+  { path: '', pathMatch: 'full', loadChildren: './penguin/penguin.module#PenguinModule' },
+  { path: '**', redirectTo: 'main' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
