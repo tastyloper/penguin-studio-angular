@@ -7,6 +7,7 @@ import { AuthService } from './service/auth.service';
 import { UserService } from './service/user.service';
 import { WINDOW_PROVIDERS } from './service/window.service';
 import { AuthGuard } from './guards/auth.guard';
+import { PageTitleService } from './service/page-title.service';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AuthGuard } from './guards/auth.guard';
     AuthService,
     UserService,
     WINDOW_PROVIDERS,
-    AuthGuard
+    AuthGuard,
+    PageTitleService
   ]
 })
 export class CoreModule {}
