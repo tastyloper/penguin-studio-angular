@@ -1,15 +1,11 @@
-import { Injectable, Inject} from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
-
-import { Item } from '../models/item';
-import { WINDOW } from './window.service';
+import { Injectable } from '@angular/core';
+import { Portfolio } from '../models/portfolio.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
-  ITEMS: Item[] = [
+  portfolios: Portfolio[] = [
     {
       id: 1,
       type: 'music',
@@ -179,18 +175,4 @@ export class PortfolioService {
       isScroll: false
     }
   ];
-
-  public layerShow = false
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(WINDOW) private window
-  ) {}
-
-  get items(): Item[] {
-    return [...this.ITEMS];
-  }
-  // get items(): Observable<Item[]> {
-  //   return of([...this.ITEMS]);
-  // }
 }

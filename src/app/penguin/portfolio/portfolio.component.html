@@ -1,42 +1,12 @@
 <section class="portfolio-wrap">
-  <div class="button-group filters-button-group">
-    <!-- Music  /  Concert  /  광고  /  교재[어학] -->
-    <span>SHOW BY :</span>
-    <button class="button" (click)="setFilter(all)" [class.is-checked]="all.getAttribute('data-filter') === selected" data-filter="all" #all>All</button>
-    <button class="button" (click)="setFilter(music)" [class.is-checked]="music.getAttribute('data-filter') === selected" data-filter="music" #music>Music</button>
-    <button class="button" (click)="setFilter(concert)" [class.is-checked]="concert.getAttribute('data-filter') === selected" data-filter="concert" #concert>Concert</button>
-    <button class="button" (click)="setFilter(ad)" [class.is-checked]="ad.getAttribute('data-filter') === selected" data-filter="ad" #ad>Advertisement</button>
+  <ul class="nav">
+    <li *ngFor="let navItem of navItems" [class.active]="navState === navItem" (click)="navState = navItem">{{ navItem }}</li>
+  </ul>
 
-    <a routerLink="/portfolioCreate" class="button admin-show" *ngIf="isAdmin">new</a>
-  </div>
-  <div class="grid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" >
-    <div class="grid-item animated fadeIn" *ngFor="let item of showItems" [style.height.px]="img.height" (click)="popUp(item)">
-      <div [attr.id]="'item' + item.id" class="card bg-dark text-white" (load)="resizeGridItem(item)">
-        <img src="{{item.img}}" alt="{{item.desc}}" #img>
-        <div class="subject-bg" [style.height.px]="img.height">
-          <p>{{item.desc}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ul class="portfolios" *ngIf="portfolioService.portfolios; else loading">
+    <li *ngFor="let portfolio of portfolioService.portfolios | portfoliosFilter: navState">
+      <img src="{{ portfolio.img }}" alt="{{ portfolio.desc }}">
+    </li>
+  </ul>
+  <ng-template #loading>loading...</ng-template>
 </section>
-<div class="layer-bg" id="layer" aria-hidden="true" role="dialog" aria-labelledby="dialogTitle"[class.layer-show]="showPopUp.active">
-  <div class="layer_area">
-    <div class="img" [ngStyle]="showPopUp.active ? {'background-image': 'url(' + showPopUp.item.img + ')'} : ''"></div>
-    <div class="info-wrap">
-      <p class="info-date">
-        <time>2019.04.07</time>
-      </p>
-      <p class="info-title">{{showPopUp.active ? showPopUp.item.desc : ''}}</p>
-      <p class="info-producing">Performed by <b>COVEO</b>, Written by <b>Connell McCarthy</b>, Produced by
-        <b>COVEO</b></p>
-      <p class="info-copyright">&copy; 2018 COVEO Music</p>
-      <ul>
-        <li>On
-          <a href="" class="youtube-link">YouTube</a>
-        </li>
-      </ul>
-    </div>
-    <button id="layer-close" class="layer-close icon-cancel" (click)="showPopUp.active = false"></button>
-  </div>
-</div>

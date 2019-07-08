@@ -1,0 +1,1 @@
+export type PortfolioNavItem = 'all' | 'music' | 'concert' | 'ad';
